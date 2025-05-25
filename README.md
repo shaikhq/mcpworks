@@ -54,10 +54,8 @@ python --version
 
 ## 2. Install Dependencies
 
-All dependencies are declared in `pyproject.toml`. To install them:
-
 ```bash
-uv pip install
+uv add mcp arxiv
 ```
 
 This will install the `mcp` runtime and `arxiv` client library required to run the server.

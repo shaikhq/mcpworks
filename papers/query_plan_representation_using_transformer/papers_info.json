@@ -1,0 +1,60 @@
+{
+  "2408.07857v3": {
+    "title": "Towards a Unified Query Plan Representation",
+    "authors": [
+      "Jinsheng Ba",
+      "Manuel Rigger"
+    ],
+    "summary": "In database systems, a query plan is a series of concrete internal steps to\nexecute a query. Multiple testing approaches utilize query plans for finding\nbugs. However, query plans are represented in a database-specific manner, so\nimplementing these testing approaches requires a non-trivial effort, hindering\ntheir adoption. We envision that a unified query plan representation can\nfacilitate the implementation of these approaches. In this paper, we present an\nexploratory case study to investigate query plan representations in nine\nwidely-used database systems. Our study shows that query plan representations\nconsist of three conceptual components: operations, properties, and formats,\nwhich enable us to design a unified query plan representation. Based on it,\nexisting testing methods can be efficiently adopted, finding 17 previously\nunknown and unique bugs. Additionally, the unified query plan representation\ncan facilitate other applications. Existing visualization tools can support\nmultiple database systems based on the unified query plan representation with\nmoderate implementation effort, and comparing unified query plans across\ndatabase systems provides actionable insights to improve their performance. We\nexpect that the unified query plan representation will enable the exploration\nof additional application scenarios.",
+    "pdf_url": "http://arxiv.org/pdf/2408.07857v3",
+    "published": "2024-08-14"
+  },
+  "2405.04814v2": {
+    "title": "A Novel Technique for Query Plan Representation Based on Graph Neural Nets",
+    "authors": [
+      "Baoming Chang",
+      "Amin Kamali",
+      "Verena Kantere"
+    ],
+    "summary": "Learning representations for query plans play a pivotal role in machine\nlearning-based query optimizers of database management systems. To this end,\nparticular model architectures are proposed in the literature to transform the\ntree-structured query plans into representations with formats learnable by\ndownstream machine learning models. However, existing research rarely compares\nand analyzes the query plan representation capabilities of these tree models\nand their direct impact on the performance of the overall optimizer. To address\nthis problem, we perform a comparative study to explore the effect of using\ndifferent state-of-the-art tree models on the optimizer's cost estimation and\nplan selection performance in relatively complex workloads. Additionally, we\nexplore the possibility of using graph neural networks (GNNs) in the query plan\nrepresentation task. We propose a novel tree model BiGG employing Bidirectional\nGNN aggregated by Gated recurrent units (GRUs) and demonstrate experimentally\nthat BiGG provides significant improvements to cost estimation tasks and\nrelatively excellent plan selection performance compared to the\nstate-of-the-art tree models.",
+    "pdf_url": "http://arxiv.org/pdf/2405.04814v2",
+    "published": "2024-05-08"
+  },
+  "2303.13844v1": {
+    "title": "Efficient Execution of SPARQL Queries with OPTIONAL and UNION Expressions",
+    "authors": [
+      "Lei Zou",
+      "Yue Pang",
+      "M. Tamer \u00d6zsu",
+      "Jiaqi Chen"
+    ],
+    "summary": "The proliferation of RDF datasets has resulted in studies focusing on\noptimizing SPARQL query processing. Most existing work focuses on basic graph\npatterns (BGPs) and ignores other vital operators in SPARQL, such as UNION and\nOPTIONAL. SPARQL queries with these operators, which we abbreviate as\nSPARQL-UO, pose serious query plan generation challenges. In this paper, we\npropose techniques for executing SPARQL-UO queries using BGP execution as a\nbuilding block, based on a novel BGP-based Evaluation (BE)-Tree representation\nof query plans. On top of this, we propose a series of cost-driven BE-tree\ntransformations to generate more efficient plans by reducing the search space\nand intermediate result sizes, and a candidate pruning technique that further\nenhances efficiency at query time. Experiments confirm that our method\noutperforms the state-of-the-art by orders of magnitude.",
+    "pdf_url": "http://arxiv.org/pdf/2303.13844v1",
+    "published": "2023-03-24"
+  },
+  "1603.00400v1": {
+    "title": "A Fast Randomized Algorithm for Multi-Objective Query Optimization",
+    "authors": [
+      "Immanuel Trummer",
+      "Christoph Koch"
+    ],
+    "summary": "Query plans are compared according to multiple cost metrics in\nmulti-objective query optimization. The goal is to find the set of Pareto plans\nrealizing optimal cost tradeoffs for a given query. So far, only algorithms\nwith exponential complexity in the number of query tables have been proposed\nfor multi-objective query optimization. In this work, we present the first\nalgorithm with polynomial complexity in the query size.\n  Our algorithm is randomized and iterative. It improves query plans via a\nmulti-objective version of hill climbing that applies multiple transformations\nin each climbing step for maximal efficiency. Based on a locally optimal plan,\nwe approximate the Pareto plan set within the restricted space of plans with\nsimilar join orders. We maintain a cache of Pareto-optimal plans for each\npotentially useful intermediate result to share partial plans that were\ndiscovered in different iterations. We show that each iteration of our\nalgorithm performs in expected polynomial time based on an analysis of the\nexpected path length between a random plan and local optima reached by hill\nclimbing. We experimentally show that our algorithm can optimize queries with\nhundreds of tables and outperforms other randomized algorithms such as the\nNSGA-II genetic algorithm over a wide range of scenarios.",
+    "pdf_url": "http://arxiv.org/pdf/1603.00400v1",
+    "published": "2016-03-01"
+  },
+  "2504.03868v1": {
+    "title": "Control Map Distribution using Map Query Bank for Online Map Generation",
+    "authors": [
+      "Ziming Liu",
+      "Leichen Wang",
+      "Ge Yang",
+      "Xinrun Li",
+      "Xingtao Hu",
+      "Hao Sun",
+      "Guangyu Gao"
+    ],
+    "summary": "Reliable autonomous driving systems require high-definition (HD) map that\ncontains detailed map information for planning and navigation. However,\npre-build HD map requires a large cost. Visual-based Online Map Generation\n(OMG) has become an alternative low-cost solution to build a local HD map.\nQuery-based BEV Transformer has been a base model for this task. This model\nlearns HD map predictions from an initial map queries distribution which is\nobtained by offline optimization on training set. Besides the quality of BEV\nfeature, the performance of this model also highly relies on the capacity of\ninitial map query distribution. However, this distribution is limited because\nthe limited query number. To make map predictions optimal on each test sample,\nit is essential to generate a suitable initial distribution for each specific\nscenario. This paper proposes to decompose the whole HD map distribution into a\nset of point representations, namely map query bank (MQBank). To build specific\nmap query initial distributions of different scenarios, low-cost standard\ndefinition map (SD map) data is introduced as a kind of prior knowledge.\nMoreover, each layer of map decoder network learns instance-level map query\nfeatures, which will lose detailed information of each point. However, BEV\nfeature map is a point-level dense feature. It is important to keep point-level\ninformation in map queries when interacting with BEV feature map. This can also\nbe solved with map query bank method. Final experiments show a new insight on\nSD map prior and a new record on OpenLaneV2 benchmark with 40.5%, 45.7% mAP on\nvehicle lane and pedestrian area.",
+    "pdf_url": "http://arxiv.org/pdf/2504.03868v1",
+    "published": "2025-04-04"
+  }
+}
