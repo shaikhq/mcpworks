@@ -1,95 +1,92 @@
 # MCP Server and MCP Inspector Setup on macOS
 
-This guide walks through creating a Python environment using `uv`, setting up an MCP server with tools, and using MCP Inspector to test and invoke those tools. All steps are intended for a local development setup on macOS.
+This project demonstrates how to build and run a local **MCP server** that exposes tools, and how to test those tools using **MCP Inspector** through a browser-based interface.
 
-## Project Setup Overview
+You'll define and run two simple tools on the server:
+- One to search papers from arXiv based on a topic
+- One to extract details about a specific paper
+
+The project runs entirely on your local **macOS** system using **Python 3.13.2**. 
+
+The server is implemented using the Model Context Protocol (MCP), and the setup is already initialized with [`uv`](https://github.com/astral-sh/uv). After cloning the repository, you’ll create a virtual environment, install dependencies, and launch the MCP server and Inspector with a single command.
+
+This is a self-contained example for learning how MCP servers are defined, how tools are registered, and how to interactively test them using the Inspector UI.
+
+
+## Project Workflow Overview
 
 ```mermaid
 flowchart TD
-    A[Start New Python Project] --> B[Set Up Virtual Environment]
-    B --> C[Install Required Libraries]
-    C --> D[Write Server Code with MCP Tools]
-    D --> E[Run MCP Server with Inspector]
-    E --> F[Open Inspector in Browser]
-    F --> G[Interact with MCP Tools Visually]
-```
-
-
-## 1. Initialize a New Python Project
-
-Initialize a Python project using `uv`. This sets up a `pyproject.toml` and a `src/` directory:
-
-```bash
-uv init
+    A[Clone Repository] --> B[Set Up Virtual Environment]
+    B --> C[Install Project Dependencies]
+    C --> D[Run MCP Server with Inspector]
+    D --> E[Open Inspector in Browser]
+    E --> F[Interact with MCP Tools Visually]
 ````
 
-## 2. Create a Virtual Environment with Python 3.13
+## 1. Clone and Set Up the Environment
 
-First, locate the path to your Python 3.13 installation:
+Clone this repository:
 
 ```bash
-which python3.13
+git clone https://github.com/your-username/your-repo.git
+cd your-repo
 ```
 
-Use that path to create a new virtual environment:
+Create a virtual environment using Python 3.13:
 
 ```bash
 uv venv --python /usr/local/bin/python3.13
 ```
 
-This creates a `.venv` directory using Python 3.13.
-
-Activate the virtual environment:
+Activate the environment:
 
 ```bash
 source .venv/bin/activate
 ```
 
-Verify that the Python version is correct:
+Confirm your Python version:
 
 ```bash
 python --version
+# Should show Python 3.13.x
 ```
 
-The output should confirm that you are using Python 3.13.
+## 2. Install Dependencies
 
-## 3. Install MCP and arXiv Client
-
-Add project dependencies using `uv`:
+All dependencies are declared in `pyproject.toml`. To install them:
 
 ```bash
-uv add mcp arxiv
+uv pip install
 ```
 
-This installs the MCP runtime and the arXiv client library.
+This will install the `mcp` runtime and `arxiv` client library required to run the server.
 
-## 4. Run the MCP Server with MCP Inspector
+## 3. Run the MCP Server with MCP Inspector
 
-Use `npx` to run MCP Inspector and launch the MCP server in one command:
+Launch MCP Inspector and the MCP server in a single command:
 
 ```bash
 npx @modelcontextprotocol/inspector uv run research_server.py
 ```
 
-Explanation:
+* MCP Inspector runs a local UI for browsing and testing tools
+* The MCP server runs your tool code and handles requests
 
-* `npx @modelcontextprotocol/inspector` launches the MCP Inspector UI in the browser and sets up proxying.
-* `uv run research_server.py` runs your MCP server using the `uv` environment.
-
-Once started, open the following URL in your browser:
+Once started, open your browser to:
 
 ```
 http://127.0.0.1:6274/
 ```
 
-This opens the Inspector UI, where you can browse, test, and invoke MCP tools defined in your server.
+You can now interact with your tools from the browser interface.
 
-## 5. Example MCP Server Implementation
-
-Create a file named `research_server.py` in your project root with the following code.
+## 4. Example MCP Server Implementation
 
 **Credit:**
 This script is adapted from the [DeepLearning.AI course on MCP](https://learn.deeplearning.ai/courses/mcp-build-rich-context-ai-apps-with-anthropic), developed in collaboration with Anthropic.
+
+File: `research_server.py`
 
 ```python
 from mcp.server.fastmcp import FastMCP
@@ -151,5 +148,5 @@ if __name__ == "__main__":
 ## Notes
 
 * MCP Inspector runs on port 6274 and proxies requests to the MCP server.
-* The `.venv` created with `uv` is automatically recognized when activated.
-* No `.python-version` file is required when using the virtual environment directly.
+* The `.venv` created with `uv` is local and excluded from version control via `.gitignore`.
+* You do **not** need a `.python-version` file; this project uses the activated virtual environment.
