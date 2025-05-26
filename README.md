@@ -29,8 +29,8 @@ flowchart TD
 Clone this repository:
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
+git clone https://github.com/shaikhq/mcpworks.git
+cd mcpworks
 ```
 
 Create a virtual environment using Python 3.13:
