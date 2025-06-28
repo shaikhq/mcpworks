@@ -60,12 +60,19 @@ uv add mcp arxiv
 
 This will install the `mcp` runtime and `arxiv` client library required to run the server.
 
-## 3. Run the MCP Server with MCP Inspector
+## 3. Run the MCP Server
+```shell
+uv run research_server.py
+```
+
+## 4. Run the MCP Inspector
+
+ with MCP Inspector
 
 Launch MCP Inspector and the MCP server in a single command:
 
 ```bash
-npx @modelcontextprotocol/inspector uv run research_server.py
+npx @modelcontextprotocol/inspector
 ```
 
 * MCP Inspector runs a local UI for browsing and testing tools
