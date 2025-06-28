@@ -62,16 +62,17 @@ This will install the `mcp` runtime and `arxiv` client library required to run t
 
 ## 3. Run the MCP Server
 ```shell
-uv run research_server.py
+uv run research_server_http.py
 ```
 
 ## 4. Run the MCP Inspector
 
  with MCP Inspector
 
-Launch MCP Inspector and the MCP server in a single command:
+Launch MCP Inspector without authentication:
 
 ```bash
+export DANGEROUSLY_OMIT_AUTH=true
 npx @modelcontextprotocol/inspector
 ```
 
@@ -85,73 +86,3 @@ http://127.0.0.1:6274/
 ```
 
 You can now interact with your tools from the browser interface.
-
-## 4. Example MCP Server Implementation
-
-**Credit:**
-This script is adapted from the [DeepLearning.AI course on MCP](https://learn.deeplearning.ai/courses/mcp-build-rich-context-ai-apps-with-anthropic), developed in collaboration with Anthropic.
-
-File: `research_server.py`
-
-```python
-from mcp.server.fastmcp import FastMCP
-import arxiv
-import os
-import json
-from typing import List
-
-mcp = FastMCP("research")
-PAPER_DIR = "papers"
-
-@mcp.tool()
-def search_papers(topic: str, max_results: int = 5) -> List[str]:
-    client = arxiv.Client()
-    search = arxiv.Search(query=topic, max_results=max_results, sort_by=arxiv.SortCriterion.Relevance)
-    papers = client.results(search)
-
-    path = os.path.join(PAPER_DIR, topic.lower().replace(" ", "_"))
-    os.makedirs(path, exist_ok=True)
-    file_path = os.path.join(path, "papers_info.json")
-
-    try:
-        with open(file_path, "r") as f:
-            papers_info = json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
-        papers_info = {}
-
-    paper_ids = []
-    for paper in papers:
-        paper_ids.append(paper.get_short_id())
-        papers_info[paper.get_short_id()] = {
-            'title': paper.title,
-            'authors': [a.name for a in paper.authors],
-            'summary': paper.summary,
-            'pdf_url': paper.pdf_url,
-            'published': str(paper.published.date())
-        }
-
-    with open(file_path, "w") as f:
-        json.dump(papers_info, f, indent=2)
-
-    return paper_ids
-
-@mcp.tool()
-def extract_info(paper_id: str) -> str:
-    for item in os.listdir(PAPER_DIR):
-        path = os.path.join(PAPER_DIR, item, "papers_info.json")
-        if os.path.exists(path):
-            with open(path, "r") as f:
-                data = json.load(f)
-                if paper_id in data:
-                    return json.dumps(data[paper_id], indent=2)
-    return f"No data found for paper {paper_id}."
-
-if __name__ == "__main__":
-    mcp.run()
-```
-
-## Notes
-
-* MCP Inspector runs on port 6274 and proxies requests to the MCP server.
-* The `.venv` created with `uv` is local and excluded from version control via `.gitignore`.
-* You do **not** need a `.python-version` file; this project uses the activated virtual environment.
