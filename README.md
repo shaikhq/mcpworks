@@ -65,16 +65,23 @@ This will install the `mcp` runtime and `arxiv` client library required to run t
 uv run research_server_http.py
 ```
 
+The above command will start the MCP server at the following endpoint: 
+http://127.0.0.1:8000
+
+![alt text](image.png)
+
 ## 4. Run the MCP Inspector
 
- with MCP Inspector
+From another terminal window.
 
-Launch MCP Inspector without authentication:
+Launch MCP Inspector without authentication. For most production deployments, you will likely need to setup authentication. However, in my current exercise, my focus was to deploy a MCP server with HTTP end point. So, I haven't enabled authentication yet.
 
 ```bash
 export DANGEROUSLY_OMIT_AUTH=true
 npx @modelcontextprotocol/inspector
 ```
+
+![alt text](image-1.png)
 
 * MCP Inspector runs a local UI for browsing and testing tools
 * The MCP server runs your tool code and handles requests
@@ -86,3 +93,7 @@ http://127.0.0.1:6274/
 ```
 
 You can now interact with your tools from the browser interface.
+
+In the URL field of the inspector, type the HTTP URL of the MCP server and click connect. Then go to the tools tab to see the tools from the MCP server and try them out. 
+
+![alt text](image-2.png)
