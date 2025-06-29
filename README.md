@@ -1,4 +1,4 @@
-# MCP Server and MCP Inspector Setup on macOS
+# MCP Server Deployment for HTTP Serving - macOS Setup + MCP Server Code
 
 This project demonstrates how to build and run a local **MCP server** that exposes tools, and how to test those tools using **MCP Inspector** through a browser-based interface.
 
